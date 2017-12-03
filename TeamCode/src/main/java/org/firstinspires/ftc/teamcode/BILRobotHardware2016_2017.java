@@ -10,35 +10,29 @@ import com.qualcomm.robotcore.hardware.Servo;
 /**
  * Created on 10/20/2016 by Mika.
  */
-public class BILRobotHardware {
+public class BILRobotHardware2016_2017 {
     /* Public OpMode members. */
     public DcMotor motorFrontRight;
     public DcMotor motorBackRight;
     public DcMotor motorFrontLeft;
     public DcMotor motorBackLeft;
     public DcMotor motorLift;
-    //public DcMotor relicExtender;
     public LightSensor lightSensor;
     public GyroSensor gyroSensor;
     public ColorSensor colorSensor;
-    //public Servo relicRecoverer;
-    public Servo jewelArm;
-    public Servo rightGripper;
-    public Servo leftGripper;
+    public Servo pusher;
     public double pusherLeft = 0.80;
     public double pusherMiddle = 0.45;
     public double pusherRight = 0.10;
     public Servo liftHolder;
     public double liftHolderStart = 0.2;
     public double liftHolderRelease = 1;
-    public double rightGripperMaxRight = 0.0;
-    public double leftGripperMaxLeft = 0.0;
 
     /* local OpMode members. */
     HardwareMap hwMap = null;
 
     /* Constructor */
-    public BILRobotHardware(){
+    public BILRobotHardware2016_2017(){
 
     }
 
@@ -56,19 +50,12 @@ public class BILRobotHardware {
         motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
         motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
 
-        //Lift & Extender Motors
+        //Lift Motor
         motorLift = hwMap.dcMotor.get("Lift");
-        //relicExtender = hw.dcMotor.get("RelicExtender");
 
         //Initialize Servos
-        //pusher = hwMap.servo.get("pusher");
-        //pusher.setPosition(pusherMiddle);
-        //relicRecoverer = hwMap.servo.get("RelicRecoverer");
-        jewelArm = hwMap.servo.get("JewelArm");
-        rightGripper = hwMap.servo.get("RightGripper");
-        leftGripper = hwMap.servo.get("LeftGripper");
-        rightGripper.setPosition(rightGripperMaxRight);
-        leftGripper.setPosition(leftGripperMaxLeft);
+        pusher = hwMap.servo.get("pusher");
+        pusher.setPosition(pusherMiddle);
         liftHolder = hwMap.servo.get("liftHolder");
         liftHolder.setPosition(liftHolderStart);
 

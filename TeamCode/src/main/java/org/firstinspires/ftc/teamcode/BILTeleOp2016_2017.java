@@ -33,7 +33,10 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
+
+import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
 /**
  * TeleOp Mode
@@ -41,10 +44,10 @@ import com.qualcomm.robotcore.util.Range;
  * Enables control of the robot via the gamepad
  */
 
-@TeleOp(name="BIL: Teleop", group="BIL")
-public class BILTeleOp extends OpMode {
+@TeleOp(name="BIL: Teleop2016_2017", group="BIL")
+public class BILTeleOp2016_2017 extends OpMode {
 
-	BILRobotHardware robot = new BILRobotHardware(); // use the class created to define a Pushbot's hardware
+	BILRobotHardware2016_2017 robot = new BILRobotHardware2016_2017(); // use the class created to define a Pushbot's hardware
 
 	double frontRight;
 	double frontLeft;
@@ -55,8 +58,6 @@ public class BILTeleOp extends OpMode {
 	double throttleX;
 	double turning;
 	double liftSpeed;
-	double rightGripper;
-	double leftGripper;
 
 	boolean directionRobot = true;
 	boolean liftDeployed = false;
@@ -65,7 +66,7 @@ public class BILTeleOp extends OpMode {
 	/**
 	 * Constructor
 	 */
-	public BILTeleOp() {
+	public BILTeleOp2016_2017() {
 		bilTeleOpJoystick = new BILTeleOpJoystick();
 	}
 
@@ -94,8 +95,7 @@ public class BILTeleOp extends OpMode {
 
 		setMotorSpeeds();
 
-		//setPusher();
-        setGrippers();
+		setPusher();
 
 		getLiftDeployed();
 
@@ -171,28 +171,7 @@ public class BILTeleOp extends OpMode {
 		robot.motorLift.setPower(liftSpeed);
 	}
 
-	protected void setGrippers() {
-        double rightGripperPosition = robot.rightGripperMaxRight;
-        double leftGripperPosition = robot.leftGripperMaxLeft;
-        if (gamepad2.right_trigger > 0.0) {
-            rightGripperPosition += 0.1;
-        }
-        if (gamepad2.left_trigger > 0.0) {
-            leftGripperPosition += 0.1;
-        }
-        if (gamepad2.right_bumper) {
-            while (rightGripperPosition > 0) {
-                rightGripperPosition -= 0.1;
-            }
-        }
-        if (gamepad2.left_bumper) {
-            while (leftGripperPosition > 0) {
-                leftGripperPosition -= 0.1;
-            }
-        }
-    }
-
-	/*protected void setPusher() {
+	protected void setPusher() {
 		double pusherPosition = robot.pusherMiddle;
 		if(gamepad2.right_trigger > 0.5) {
 			pusherPosition = robot.pusherRight;
@@ -201,7 +180,7 @@ public class BILTeleOp extends OpMode {
 		}
 
 		robot.pusher.setPosition(pusherPosition);
-	}*/
+	}
 
 	protected void getLiftDeployed() {
 		if(!liftDeployed) {
