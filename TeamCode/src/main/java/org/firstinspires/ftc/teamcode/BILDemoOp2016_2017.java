@@ -44,10 +44,10 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  * Enables control of the robot via the gamepad
  */
 
-@TeleOp(name="BIL: Demo Teleop", group="BIL")
-public class BILDemoOp extends OpMode {
+@TeleOp(name="BIL: Demo Teleop 2016-2017", group="BIL")
+public class BILDemoOp2016_2017 extends OpMode {
 
-    BILRobotHardware robot = new BILRobotHardware(); // use the class created to define a Pushbot's hardware
+    BILRobotHardware2016_2017 robot = new BILRobotHardware2016_2017(); // use the class created to define a Pushbot's hardware
 
     double frontRight;
     double frontLeft;
@@ -66,7 +66,7 @@ public class BILDemoOp extends OpMode {
     /**
      * Constructor
      */
-    public BILDemoOp() {
+    public BILDemoOp2016_2017() {
         bilTeleOpJoystick = new BILTeleOpJoystick();
     }
 
