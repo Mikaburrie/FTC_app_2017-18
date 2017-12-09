@@ -16,23 +16,25 @@ public class BILRobotHardware {
     public DcMotor motorBackRight;
     public DcMotor motorFrontLeft;
     public DcMotor motorBackLeft;
-    public DcMotor motorLift;
+    //public DcMotor motorLift;
+    public DcMotor liftHolder;
     //public DcMotor relicExtender;
     public LightSensor lightSensor;
     public GyroSensor gyroSensor;
     public ColorSensor colorSensor;
     //public Servo relicRecoverer;
     public Servo jewelArm;
-    public Servo rightGripper;
-    public Servo leftGripper;
+    public Servo rightGrabber;
+    public Servo leftGrabber;
     public double pusherLeft = 0.80;
     public double pusherMiddle = 0.45;
     public double pusherRight = 0.10;
-    public Servo liftHolder;
+
     public double liftHolderStart = 0.2;
-    public double liftHolderRelease = 1;
+    public int liftHolderRelease = 1;
     public double rightGripperMaxRight = 0.0;
     public double leftGripperMaxLeft = 0.0;
+    public double jewelArmStartPosition = 0.5;
 
     /* local OpMode members. */
     HardwareMap hwMap = null;
@@ -57,7 +59,7 @@ public class BILRobotHardware {
         motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
 
         //Lift & Extender Motors
-        motorLift = hwMap.dcMotor.get("Lift");
+        //motorLift = hwMap.dcMotor.get("lift");
         //relicExtender = hw.dcMotor.get("RelicExtender");
 
         //Initialize Servos
@@ -65,12 +67,13 @@ public class BILRobotHardware {
         //pusher.setPosition(pusherMiddle);
         //relicRecoverer = hwMap.servo.get("RelicRecoverer");
         jewelArm = hwMap.servo.get("JewelArm");
-        rightGripper = hwMap.servo.get("RightGripper");
-        leftGripper = hwMap.servo.get("LeftGripper");
-        rightGripper.setPosition(rightGripperMaxRight);
-        leftGripper.setPosition(leftGripperMaxLeft);
-        liftHolder = hwMap.servo.get("liftHolder");
-        liftHolder.setPosition(liftHolderStart);
+        rightGrabber = hwMap.servo.get("Grabber_R");
+        leftGrabber = hwMap.servo.get("Grabber_L");
+        rightGrabber.setPosition(rightGripperMaxRight);
+        leftGrabber.setPosition(leftGripperMaxLeft);
+        liftHolder = hwMap.dcMotor.get("lift");
+        liftHolder.setTargetPosition(0);
+        jewelArm.setPosition(this.jewelArmStartPosition);
 
         //Initialize sensors
         lightSensor = hwMap.lightSensor.get("lightSensor");
@@ -90,5 +93,7 @@ public class BILRobotHardware {
         motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        jewelArm.setPosition(1.0);
     }
 }

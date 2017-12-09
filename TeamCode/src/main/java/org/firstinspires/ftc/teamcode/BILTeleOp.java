@@ -57,9 +57,10 @@ public class BILTeleOp extends OpMode {
 	double liftSpeed;
 	double rightGripper;
 	double leftGripper;
+	double jewelArm;
 
 	boolean directionRobot = true;
-	boolean liftDeployed = false;
+	boolean liftDeployed = true;
 	double maxSpeed = 0.7;
 	BILTeleOpJoystick bilTeleOpJoystick;
 	/**
@@ -97,7 +98,7 @@ public class BILTeleOp extends OpMode {
 		//setPusher();
         setGrippers();
 
-		getLiftDeployed();
+		//deployLift();
 
 		//telemetry.addData("Text", "*** Robot Data***");
 		telemetry.addData("F/R", "direction:  " + String.format("%b",directionRobot ));
@@ -129,7 +130,7 @@ public class BILTeleOp extends OpMode {
 		throttleX = gamepad1.left_stick_x;
 		turning = gamepad1.right_stick_x;
 		if(liftDeployed) {
-			liftSpeed = gamepad2.left_stick_y;
+			liftSpeed = gamepad2.left_stick_y * -1;
 		} else {
 			liftSpeed = 0;
 		}
@@ -168,30 +169,36 @@ public class BILTeleOp extends OpMode {
 		robot.motorBackLeft.setPower(backLeft);
 		robot.motorFrontRight.setPower(frontRight);
 		robot.motorBackRight.setPower(backRight);
-		robot.motorLift.setPower(liftSpeed);
+		robot.liftHolder.setPower(liftSpeed);
 	}
 
 	protected void setGrippers() {
-        double rightGripperPosition = robot.rightGripperMaxRight;
-        double leftGripperPosition = robot.leftGripperMaxLeft;
-        if (gamepad2.right_trigger > 0.0) {
-            rightGripperPosition += 0.1;
+		double rightGripperPosition = robot.rightGrabber.getPosition();
+		double leftGripperPosition = robot.leftGrabber.getPosition();
+        if (gamepad2.right_trigger < 0.9 && gamepad2.right_trigger > -1.0) {
+            rightGripperPosition -= 0.1;
         }
-        if (gamepad2.left_trigger > 0.0) {
-            leftGripperPosition += 0.1;
+        if (gamepad2.left_trigger < 0.9 && gamepad2.left_trigger > -1.0) {
+            leftGripperPosition -= 0.1;
         }
         if (gamepad2.right_bumper) {
-            while (rightGripperPosition > 0) {
-                rightGripperPosition -= 0.1;
+            while (rightGripperPosition < 0.9) {
+                rightGripperPosition += 0.1;
             }
         }
         if (gamepad2.left_bumper) {
-            while (leftGripperPosition > 0) {
-                leftGripperPosition -= 0.1;
+            while (leftGripperPosition < 0.9) {
+                leftGripperPosition += 0.1;
             }
         }
+        robot.rightGrabber.setPosition(rightGripperPosition);
+        robot.leftGrabber.setPosition(leftGripperPosition);
     }
 
+    protected void setJewelArm() {
+		double jewelArmPosition = robot.jewelArm.getPosition();
+		robot.jewelArm.setPosition(1.0);
+	}
 	/*protected void setPusher() {
 		double pusherPosition = robot.pusherMiddle;
 		if(gamepad2.right_trigger > 0.5) {
@@ -203,12 +210,12 @@ public class BILTeleOp extends OpMode {
 		robot.pusher.setPosition(pusherPosition);
 	}*/
 
-	protected void getLiftDeployed() {
-		if(!liftDeployed) {
+	protected void deployLift() {
+		/*if(!liftDeployed) {
 			if(gamepad2.x && gamepad2.b) {
 				liftDeployed = true;
-				robot.liftHolder.setPosition(robot.liftHolderRelease);
+				robot.liftHolder.setTargetPosition(robot.liftHolderRelease);
 			}
-		}
+		}*/
 	}
 }
