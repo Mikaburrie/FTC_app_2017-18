@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 /**
@@ -12,39 +11,35 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @Autonomous(name="BIL: Jewel Blue", group="BIL")
 public class BILJewelBlue extends BILAutonomousCommon {
 
-    BILRobotHardware robot = new BILRobotHardware();
-    ElapsedTime time = new ElapsedTime();
-
     @Override public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
 
         robot.colorSensor.enableLed(true);
 
-       // robot.colorSensor = hardwareMap.colorSensor.get("colorSensor");
+        // robot.colorSensor = hardwareMap.colorSensor.get("colorSensor");
 
         waitForStart();
 
         robot.jewelArm.setPosition(0.0);
 
-        Thread.sleep(2000);
+        delay(2000);
 
         telemetry.addData("Red", robot.colorSensor.red());
         telemetry.addData("Blue", robot.colorSensor.blue());
         telemetry.update();
 
-        if(robot.colorSensor.red() < robot.colorSensor.blue()){ //left side red
+        if(robot.colorSensor.red() > robot.colorSensor.blue()){ //left side red
 
-            setDriveMotors(0.5, -0.5, -0.5, 0.5);
+            setDriveMotors(-0.5, -0.5, 0.5, 0.5);
         } else if(robot.colorSensor.blue() > robot.colorSensor.red()) { //right side is red
 
-            setDriveMotors(-0.5, 0.5, 0.5, -0.5);
+            setDriveMotors(0.5, 0.5, -0.5, -0.5);
         }
 
         time.reset();
 
-        while(time.milliseconds() < 100){
-            idle();
-        }
+        delay(250);
+
 
         setAllDriveMotors(0);
         robot.jewelArm.setPosition(robot.jewelArmStartPosition);
