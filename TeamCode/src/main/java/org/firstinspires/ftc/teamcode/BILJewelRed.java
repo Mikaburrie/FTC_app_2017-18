@@ -12,8 +12,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @Autonomous(name="BIL: Jewel Red", group="BIL")
 public class BILJewelRed extends BILAutonomousCommon{
 
-    BILRobotHardware robot = new BILRobotHardware();
-    ElapsedTime time = new ElapsedTime();
+    //BILRobotHardware robot = new BILRobotHardware();
+    //ElapsedTime time = new ElapsedTime();
 
     @Override public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
@@ -26,7 +26,7 @@ public class BILJewelRed extends BILAutonomousCommon{
 
         robot.jewelArm.setPosition(0.0);
 
-        Thread.sleep(2000);
+        delay(2000);
 
         telemetry.addData("Red", robot.colorSensor.red());
         telemetry.addData("Blue", robot.colorSensor.blue());
@@ -34,17 +34,15 @@ public class BILJewelRed extends BILAutonomousCommon{
 
         if(robot.colorSensor.red() > robot.colorSensor.blue()){ //left side red
 
-            setDriveMotors(0.5, -0.5, -0.5, 0.5);
+            setDriveMotors(0.5, 0.5, -0.5, -0.5);
         } else if(robot.colorSensor.blue() > robot.colorSensor.red()) { //right side is red
 
-            setDriveMotors(-0.5, 0.5, 0.5, -0.5);
+            setDriveMotors(-0.5, -0.5, 0.5, 0.5);
         }
 
         time.reset();
 
-        while(time.milliseconds() < 100){
-            idle();
-        }
+        delay(250);
 
         setAllDriveMotors(0);
         robot.jewelArm.setPosition(robot.jewelArmStartPosition);

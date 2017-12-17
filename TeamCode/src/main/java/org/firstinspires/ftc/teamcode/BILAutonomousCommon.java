@@ -327,4 +327,15 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
         // Reset the cycle clock for the next pass.
         time.reset();
     }
+
+    /**
+     *
+     * @param milliseconds The amount of time to wait.
+     */
+    public void delay(long milliseconds) {
+        time.reset();
+        while(time.milliseconds() < milliseconds){
+            idle();
+        }
+    }
 }

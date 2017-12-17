@@ -26,7 +26,7 @@ public class BILJewelBlue extends BILAutonomousCommon {
 
         robot.jewelArm.setPosition(0.0);
 
-        Thread.sleep(2000);
+        delay(2000);
 
         telemetry.addData("Red", robot.colorSensor.red());
         telemetry.addData("Blue", robot.colorSensor.blue());
@@ -42,9 +42,7 @@ public class BILJewelBlue extends BILAutonomousCommon {
 
         time.reset();
 
-        while(time.milliseconds() < 250){
-            idle();
-        }
+        delay(250);
 
 
         setAllDriveMotors(0);
