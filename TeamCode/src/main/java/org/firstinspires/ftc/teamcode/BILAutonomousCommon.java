@@ -334,7 +334,7 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
      */
     public void delay(long milliseconds) {
         time.reset();
-        while(time.milliseconds() < milliseconds){
+        while(time.milliseconds() < milliseconds && !isStopRequested()){
             idle();
         }
     }
