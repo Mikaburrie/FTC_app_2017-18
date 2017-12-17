@@ -16,11 +16,8 @@ public class BILStrafeTest extends BILAutonomousCommon{
 
         setDriveMotors(0.5, -0.5, -0.5, 0.5);
 
-        time.reset();
+        delay(2000);
 
-        while(time.milliseconds() < 2000){
-            idle();
-        }
         setAllDriveMotors(0);
 
     }

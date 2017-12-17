@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-import android.app.Activity;
 import android.graphics.Color;
-import android.view.View;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -36,7 +34,7 @@ public class BILColorSensorTest extends LinearOpMode{
             // convert the RGB values to HSV values.
             Color.RGBToHSV(colorSensor.red(), colorSensor.green(), colorSensor.blue(), hsvValues);
             // send the info back to driver station using telemetry function.
-            telemetry.addData("Clear", colorSensor.alpha());
+            telemetry.addData("Alpha", colorSensor.alpha());
             telemetry.addData("Red", colorSensor.red());
             telemetry.addData("Green", colorSensor.green());
             telemetry.addData("Blue", colorSensor.blue());
