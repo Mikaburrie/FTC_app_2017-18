@@ -166,21 +166,17 @@ public class BILTeleOp extends OpMode {
 	protected void setGrippers() {
 		double rightGripperPosition = robot.rightGrabber.getPosition();
 		double leftGripperPosition = robot.leftGrabber.getPosition();
-        if (gamepad2.right_trigger < 0.9 && gamepad2.right_trigger > -1.0) {
-            rightGripperPosition -= 0.1;
+        if (gamepad2.right_trigger > 0.5) {
+            rightGripperPosition = 0;
         }
-        if (gamepad2.left_trigger < 0.9 && gamepad2.left_trigger > -1.0) {
-            leftGripperPosition -= 0.1;
+        if (gamepad2.left_trigger < 0.5) {
+            leftGripperPosition = 0;
         }
         if (gamepad2.right_bumper) {
-            while (rightGripperPosition < 0.9) {
-                rightGripperPosition += 0.1;
-            }
+            rightGripperPosition = 0.8;
         }
         if (gamepad2.left_bumper) {
-            while (leftGripperPosition < 0.9) {
-                leftGripperPosition += 0.1;
-            }
+            leftGripperPosition = 0.8;
         }
         robot.rightGrabber.setPosition(rightGripperPosition);
         robot.leftGrabber.setPosition(leftGripperPosition);
