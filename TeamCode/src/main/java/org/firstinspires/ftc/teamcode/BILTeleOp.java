@@ -128,7 +128,7 @@ public class BILTeleOp extends OpMode {
 		throttleY = -gamepad1.left_stick_y;
 		throttleX = gamepad1.left_stick_x;
 		turning = gamepad1.right_stick_x;
-		liftSpeed = gamepad2.left_stick_y;
+		liftSpeed = -gamepad2.left_stick_y;
 	}
 
 	protected void scaleJoystickInput() {
@@ -167,17 +167,17 @@ public class BILTeleOp extends OpMode {
 		double rightGripperPosition = robot.rightGrabber.getPosition();
 		double leftGripperPosition = robot.leftGrabber.getPosition();
         if (gamepad2.right_trigger > 0.5) {
-            rightGripperPosition = 0;
-        }
-        if (gamepad2.left_trigger < 0.5) {
-            leftGripperPosition = 0;
-        }
-        if (gamepad2.right_bumper) {
             rightGripperPosition = 0.8;
-        }
-        if (gamepad2.left_bumper) {
+        } else {
+        	rightGripperPosition = -0.5;
+		}
+
+        if (gamepad2.left_trigger > 0.5) {
             leftGripperPosition = 0.8;
-        }
+        } else {
+        	leftGripperPosition = -0.5;
+		}
+
         robot.rightGrabber.setPosition(rightGripperPosition);
         robot.leftGrabber.setPosition(leftGripperPosition);
     }
