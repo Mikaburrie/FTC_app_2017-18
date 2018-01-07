@@ -47,6 +47,6 @@ public class BILJewelBlue extends BILAutonomousCommon {
 
         setDriveMotors(-0.5, 0.5, 0.5, -0.5);
 
-        delay(1500);
+        delay(2000);
     }
 }
