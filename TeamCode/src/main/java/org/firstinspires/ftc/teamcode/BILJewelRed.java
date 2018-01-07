@@ -45,7 +45,7 @@ public class BILJewelRed extends BILAutonomousCommon{
 
         delay(500);
 
-        setDriveMotors(-1, 1, 1, -1);
+        setDriveMotors(0.5, -0.5, -0.5, 0.5);
 
         delay(1500);
     }
