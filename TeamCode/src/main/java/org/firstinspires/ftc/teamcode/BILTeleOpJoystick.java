@@ -25,14 +25,15 @@ public class    BILTeleOpJoystick {
         return scaleD;
     }
 
-    double deadFix(double scaleD, double deadband, double multiplier) {
+    double deadFix(double scaleD, double deadband) {
 
         double fixedD = 0;
+        double multiplier = 1/(1 - deadband);
 
-        if (scaleD < 0) {
+        if (scaleD < -deadband) {
             fixedD = (scaleD + deadband) * multiplier;
         }
-        else if (scaleD > 0) {
+        else if (scaleD > deadband) {
             fixedD = (scaleD - deadband) * multiplier;
         }
         return  fixedD;
@@ -45,8 +46,8 @@ public class    BILTeleOpJoystick {
     public double normalizeSpeed(double dVal, double expo, double maxSpeed)
     {
         double scaleD = scaleInput(dVal, expo);
-    //    double fixedD = deadFix(scaleD, .05, 1.05);
-        double fixedD = scaleToSpeed(scaleD, maxSpeed);
+        double fixedD = deadFix(scaleD, .05);
+        fixedD = scaleToSpeed(fixedD, maxSpeed);
         return fixedD;
     }
 
