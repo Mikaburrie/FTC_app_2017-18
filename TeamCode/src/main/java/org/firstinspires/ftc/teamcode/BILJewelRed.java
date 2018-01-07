@@ -42,6 +42,11 @@ public class BILJewelRed extends BILAutonomousCommon{
 
         setAllDriveMotors(0);
         robot.jewelArm.setPosition(robot.jewelArmStartPosition);
+      
+        delay(500);
+
+        setDriveMotors(0.5, -0.5, -0.5, 0.5);
+
         delay(2000);
     }
 }
