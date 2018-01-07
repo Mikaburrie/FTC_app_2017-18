@@ -40,8 +40,11 @@ public class BILJewelBlue extends BILAutonomousCommon {
 
         delay(250);
 
-
         setAllDriveMotors(0);
         robot.jewelArm.setPosition(robot.jewelArmStartPosition);
+
+        setDriveMotors(1, -1, -1, 1);
+
+        delay(1500);
     }
 }
