@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -8,12 +9,20 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 
+import com.disnodeteam.dogecv.detectors.JewelDetector;
+
+import static com.disnodeteam.dogecv.detectors.JewelDetector.JewelOrder.*;
+
 /**
  * Created on 1/7/2017 by Mika.
  */
 public abstract class BILAutonomousCommon extends LinearOpMode {
     BILRobotHardware robot = new BILRobotHardware();
     ElapsedTime time = new ElapsedTime();
+
+    public enum Color {
+        RED, BLUE, UNKNOWN
+    }
 
     public final static int ticksPerRotation = 1440;
     public final static double wheelCircumference = (4 * Math.PI)/12; //circumference in feet
@@ -326,6 +335,32 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
 
         // Reset the cycle clock for the next pass.
         time.reset();
+    }
+
+    public Color detectLeft() {
+        Color left = Color.UNKNOWN;
+
+        JewelDetector detector = new JewelDetector();
+        detector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+
+        JewelDetector.JewelOrder currentOrder = detector.getCurrentOrder();
+
+        if(robot.colorSensor.red() != robot.colorSensor.blue()) {
+            if(robot.colorSensor.red() > robot.colorSensor.blue()) {
+                left = Color.RED;
+            } else {
+                left = Color.BLUE;
+            }
+        } else if(currentOrder == UNKNOWN) {
+            currentOrder = detector.getLastOrder();
+            if(currentOrder == RED_BLUE) {
+                left = Color.RED;
+            } else {
+                left = Color.BLUE;
+            }
+        }
+
+        return left;
     }
 
     /**
