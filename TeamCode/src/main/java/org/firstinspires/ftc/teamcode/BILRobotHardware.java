@@ -17,7 +17,7 @@ public class BILRobotHardware {
     public DcMotor motorFrontLeft;
     public DcMotor motorBackLeft;
     //public DcMotor motorLift;
-    public DcMotor liftHolder;
+    public DcMotor motorLift;
     //public DcMotor relicExtender;
     public LightSensor lightSensor;
     public GyroSensor gyroSensor;
@@ -57,6 +57,7 @@ public class BILRobotHardware {
         motorBackLeft = hwMap.dcMotor.get("Left_Back");
         motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
         motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
+        motorLift = hwMap.dcMotor.get("lift");
 
         //Lift & Extender Motors
         //motorLift = hwMap.dcMotor.get("lift");
@@ -71,8 +72,6 @@ public class BILRobotHardware {
         leftGrabber = hwMap.servo.get("Grabber_L");
         rightGrabber.setPosition(rightGripperMaxRight);
         leftGrabber.setPosition(leftGripperMaxLeft);
-        liftHolder = hwMap.dcMotor.get("lift");
-        liftHolder.setTargetPosition(0);
         jewelArm.setPosition(this.jewelArmStartPosition);
 
         //Initialize sensors
@@ -87,6 +86,7 @@ public class BILRobotHardware {
         motorBackLeft.setPower(0);
         motorFrontRight.setPower(0);
         motorBackRight.setPower(0);
+        motorLift.setPower(0);
 
         // Set all motors to run with encoders.
         motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -99,6 +99,7 @@ public class BILRobotHardware {
         motorBackRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorFrontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBackLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         jewelArm.setPosition(1.0);
     }

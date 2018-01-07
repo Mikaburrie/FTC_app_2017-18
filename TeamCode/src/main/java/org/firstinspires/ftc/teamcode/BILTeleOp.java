@@ -60,7 +60,6 @@ public class BILTeleOp extends OpMode {
 	double jewelArm;
 
 	boolean directionRobot = true;
-	boolean liftDeployed = true;
 	double maxSpeed = 0.7;
 	BILTeleOpJoystick bilTeleOpJoystick;
 	/**
@@ -129,11 +128,7 @@ public class BILTeleOp extends OpMode {
 		throttleY = -gamepad1.left_stick_y;
 		throttleX = gamepad1.left_stick_x;
 		turning = gamepad1.right_stick_x;
-		if(liftDeployed) {
-			liftSpeed = gamepad2.left_stick_y * -1;
-		} else {
-			liftSpeed = 0;
-		}
+		liftSpeed = gamepad2.left_stick_y;
 	}
 
 	protected void scaleJoystickInput() {
@@ -142,11 +137,7 @@ public class BILTeleOp extends OpMode {
 		throttleY = bilTeleOpJoystick.normalizeSpeed(throttleY, 2.0, maxSpeed);
 		throttleX = bilTeleOpJoystick.normalizeSpeed(throttleX, 2.0, maxSpeed);
 		turning = bilTeleOpJoystick.normalizeSpeed(turning, 2.0, maxSpeed);
-		liftSpeed = bilTeleOpJoystick.normalizeSpeed(liftSpeed, 2.0, maxSpeed)/2;
-
-		if(gamepad2.a){
-			liftSpeed *= 2;
-		}
+		liftSpeed = bilTeleOpJoystick.normalizeSpeed(liftSpeed, 2.0, maxSpeed);
 	}
 
 	protected void getMeccanumMotorSpeeds(double leftX, double leftY, double rightX) {
@@ -169,7 +160,7 @@ public class BILTeleOp extends OpMode {
 		robot.motorBackLeft.setPower(backLeft);
 		robot.motorFrontRight.setPower(frontRight);
 		robot.motorBackRight.setPower(backRight);
-		robot.liftHolder.setPower(liftSpeed);
+		robot.motorLift.setPower(liftSpeed);
 	}
 
 	protected void setGrippers() {
@@ -199,6 +190,7 @@ public class BILTeleOp extends OpMode {
 		double jewelArmPosition = robot.jewelArm.getPosition();
 		robot.jewelArm.setPosition(1.0);
 	}
+
 	/*protected void setPusher() {
 		double pusherPosition = robot.pusherMiddle;
 		if(gamepad2.right_trigger > 0.5) {
@@ -206,16 +198,16 @@ public class BILTeleOp extends OpMode {
 		} else if(gamepad2.left_trigger > 0.5) {
 			pusherPosition = robot.pusherLeft;
 		}
-
+ [
 		robot.pusher.setPosition(pusherPosition);
 	}*/
 
-	protected void deployLift() {
-		/*if(!liftDeployed) {
+	/*protected void deployLift() {
+		if(!liftDeployed) {
 			if(gamepad2.x && gamepad2.b) {
 				liftDeployed = true;
 				robot.liftHolder.setTargetPosition(robot.liftHolderRelease);
 			}
-		}*/
-	}
+		}
+	}*/
 }
