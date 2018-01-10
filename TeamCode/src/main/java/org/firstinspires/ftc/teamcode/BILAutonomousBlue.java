@@ -4,12 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 
 /**
- * Created by lpane on 12/19/2017.
+ * Created by nill on 1/9/2017.
  */
 
 
-@Autonomous(name="BIL: Jewel Red", group="BIL")
-public class BILJewelRed extends BILAutonomousCommon{
+@Autonomous(name="BIL: Autonomous Blue", group="BIL")
+public class BILAutonomousBlue extends BILAutonomousCommon {
 
     @Override public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
@@ -19,6 +19,8 @@ public class BILJewelRed extends BILAutonomousCommon{
         // robot.colorSensor = hardwareMap.colorSensor.get("colorSensor");
 
         waitForStart();
+
+        robot.leftGrabber.setPosition(0.8);
 
         robot.jewelArm.setPosition(0.0);
 
@@ -30,10 +32,10 @@ public class BILJewelRed extends BILAutonomousCommon{
 
         if(robot.colorSensor.red() > robot.colorSensor.blue()){ //left side red
 
-            setDriveMotors(0.5, 0.5, -0.5, -0.5);
+            setDriveMotors(-0.5, -0.5, 0.5, 0.5);
         } else if(robot.colorSensor.blue() > robot.colorSensor.red()) { //right side is red
 
-            setDriveMotors(-0.5, -0.5, 0.5, 0.5);
+            setDriveMotors(0.5, 0.5, -0.5, -0.5);
         }
 
         time.reset();
@@ -45,7 +47,7 @@ public class BILJewelRed extends BILAutonomousCommon{
 
         delay(500);
 
-        setDriveMotors(0.5, -0.5, -0.5, 0.5);
+        setDriveMotors(-0.5, 0.5, 0.5, -0.5);
 
         delay(2000);
     }

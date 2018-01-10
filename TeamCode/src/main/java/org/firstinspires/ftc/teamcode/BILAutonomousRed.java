@@ -1,24 +1,22 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-
-
 /**
- * Created by lpane on 12/19/2017.
+ * Created by nill on 1/9/18.
  */
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-@Autonomous(name="BIL: Jewel Red", group="BIL")
-public class BILJewelRed extends BILAutonomousCommon{
-
+@Autonomous(name="BIL: Autonomous Red", group="BIL")
+public class BILAutonomousRed extends BILAutonomousCommon
+{
     @Override public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
 
         robot.colorSensor.enableLed(true);
 
-        // robot.colorSensor = hardwareMap.colorSensor.get("colorSensor");
-
         waitForStart();
+
+        robot.leftGrabber.setPosition(0.8);
 
         robot.jewelArm.setPosition(0.0);
 
