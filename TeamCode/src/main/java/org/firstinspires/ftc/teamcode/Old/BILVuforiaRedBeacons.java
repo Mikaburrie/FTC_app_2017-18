@@ -1,16 +1,21 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Old;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+import org.firstinspires.ftc.teamcode.BILAutonomousCommon;
+import org.firstinspires.ftc.teamcode.BILVuforiaCommon;
+
 import java.util.List;
 
 /**
  * Created on 11/12/2016  by Mika.
  */
 @Autonomous(name="BIL: Red Beacons", group="BIL")
+@Disabled
 public class BILVuforiaRedBeacons extends BILAutonomousCommon {
 
     VuforiaLocalizer vuforia;

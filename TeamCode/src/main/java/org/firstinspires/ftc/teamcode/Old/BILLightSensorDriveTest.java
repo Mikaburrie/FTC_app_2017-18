@@ -1,16 +1,14 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Old;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+import org.firstinspires.ftc.teamcode.BILAutonomousCommon;
 
 /**
  * Made by Zoha Peterson on 12/31/16.
  */
 @Autonomous(name="BIL: Light Sensor Drive Test", group="BIL")
-    public class BILLightSensorDriveTest extends BILAutonomousCommon{
-
-        BILRobotHardware robot = new BILRobotHardware();
-
+    public class BILLightSensorDriveTest extends BILAutonomousCommon {
 
         @Override
         public void runOpMode() throws InterruptedException {

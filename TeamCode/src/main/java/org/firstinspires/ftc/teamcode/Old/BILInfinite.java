@@ -1,18 +1,12 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Old;
 
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.Servo;
-
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by nill on 11/19/15.
  */
-public class BILEncoderAutonomousLeft extends BILAutonomousCommon2015 {
+public class BILInfinite extends BILAutonomousCommon2015 {
     //DcMotor motorRight;
     //DcMotor motorLeft;
 
@@ -48,11 +42,11 @@ public class BILEncoderAutonomousLeft extends BILAutonomousCommon2015 {
             case 1:
                 resetDriveEncoders();
                 runUsingEncoders();
-                setForwardDriveDistance(7.0, circum); //drives backwards for 4.5 feet
+                setForwardDriveDistance(70.0, circum); //drives backwards for 45 feet
                 calculateSpeedBasedOnGyro();
                 driveForward(speedContainer);
 
-                if (haveDriveEncodersReached() || getDistance() < 8)
+                if (haveDriveEncodersReached() || getDistance() < 10)
                 {
                     stopDriving();
 
