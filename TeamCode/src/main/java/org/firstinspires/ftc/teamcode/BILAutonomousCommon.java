@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
+import com.disnodeteam.dogecv.detectors.CryptoboxDetector;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -20,6 +22,10 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
     BILRobotHardware robot = new BILRobotHardware();
     ElapsedTime time = new ElapsedTime();
 
+    CryptoboxDetector cDetector = new CryptoboxDetector();
+    JewelDetector jDetector = new JewelDetector();
+
+
     public enum Color {
         RED, BLUE, UNKNOWN
     }
@@ -30,6 +36,11 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
     public final double lineColorThreshold = 0.04;
     double darkFloorValue = 0;
     double sideSpeed = 0.5;
+
+    public void loadObjects() {
+        cDetector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+        jDetector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+    }
 
     /**
      * @param mode The run mode to set for all motors.
@@ -338,12 +349,12 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
     }
 
     public Color detectLeft() {
+
         Color left = Color.UNKNOWN;
 
-        JewelDetector detector = new JewelDetector();
-        detector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+        jDetector.enable();
 
-        JewelDetector.JewelOrder currentOrder = detector.getCurrentOrder();
+        JewelDetector.JewelOrder currentOrder = jDetector.getCurrentOrder();
 
         if(robot.colorSensor.red() != robot.colorSensor.blue()) {
             if(robot.colorSensor.red() > robot.colorSensor.blue()) {
@@ -352,7 +363,7 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
                 left = Color.BLUE;
             }
         } else if(currentOrder == UNKNOWN) {
-            currentOrder = detector.getLastOrder();
+            currentOrder = jDetector.getLastOrder();
             if(currentOrder == RED_BLUE) {
                 left = Color.RED;
             } else {
@@ -360,7 +371,64 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
             }
         }
 
+        jDetector.disable();
+
         return left;
+    }
+
+    public void parkSafe(boolean leftPos) {
+        cDetector.enable();
+
+        setAllDriveMotors(0.5);
+        delay(3000);
+
+        setDriveMotors(-0.5,0.5,0.5,-0.5);
+
+        for(int i = 0; i <= 5000 || !cDetector.isCryptoBoxDetected() && !isStopRequested(); i++ ) {
+            delay(1);
+        }
+
+        cryptoAlign();
+
+        if(!leftPos) {
+            setAllDriveMotors(0.5);
+            delay(3000);
+            setAllDriveMotors(0);
+        }
+
+        cDetector.disable();
+    }
+
+    public void cryptoAlign() {
+        if (cDetector.getCryptoBoxCenterPosition() > 175) {
+            setDriveMotors(-0.5, 0.5, 0.5, -0.5);
+        } else {
+            setDriveMotors(0.5, -0.5, -0.5, 0.5);
+        }
+
+        delay(250);
+
+        setAllDriveMotors(0);
+    }
+
+    public void parkSimple(Color teamColor) {
+        if(teamColor == Color.RED) {
+            setDriveMotors(0.5, 0.5, -0.5, -0.5);
+        } else if(teamColor == Color.BLUE) {
+            setDriveMotors(-0.5, -0.5, 0.5, 0.5);
+        }
+
+        delay(500);
+
+        setAllDriveMotors(0);
+
+        delay(1000);
+
+        setAllDriveMotors(0.5);
+
+        delay(1000);
+
+        setAllDriveMotors(0);
     }
 
     /**

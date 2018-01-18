@@ -16,6 +16,7 @@ public class BILAutonomousRed extends BILAutonomousCommon
         boolean leftMovement = false;
 
         robot.init(hardwareMap);
+        loadObjects();
 
         robot.colorSensor.enableLed(true);
 
@@ -50,13 +51,12 @@ public class BILAutonomousRed extends BILAutonomousCommon
             setDriveMotors(-0.5,-0.5,0.5,0.5);
         }
 
-        time.reset();
-
         delay(250);
 
         setAllDriveMotors(0);
 
-        robot.jewelArm.setPosition(robot.jewelArmStartPosition);
+        robot.jewelArm.setPosition(0.5);
+
 
         delay(500);
 
@@ -66,13 +66,14 @@ public class BILAutonomousRed extends BILAutonomousCommon
             setDriveMotors(0.5,0.5,-0.5,-0.5);
         }
 
-        time.reset();
-
         delay(250);
 
         setAllDriveMotors(0);
         //setDriveMotors(0.5, -0.5, -0.5, 0.5);
 
         delay(2000);
+
+        //parkSafe(false);
+        parkSimple(RED);
     }
 }
