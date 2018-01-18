@@ -19,8 +19,8 @@ import static com.disnodeteam.dogecv.detectors.JewelDetector.JewelOrder.*;
  * Created on 1/7/2017 by Mika.
  */
 public abstract class BILAutonomousCommon extends LinearOpMode {
-    BILRobotHardware robot = new BILRobotHardware();
-    ElapsedTime time = new ElapsedTime();
+    public BILRobotHardware robot = new BILRobotHardware();
+    public ElapsedTime time = new ElapsedTime();
 
     CryptoboxDetector cDetector = new CryptoboxDetector();
     JewelDetector jDetector = new JewelDetector();
@@ -34,7 +34,7 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
     public final static double wheelCircumference = (4 * Math.PI)/12; //circumference in feet
     public final static int driveTimeScalar = 3;
     public final double lineColorThreshold = 0.04;
-    double darkFloorValue = 0;
+    public double darkFloorValue = 0;
     double sideSpeed = 0.5;
 
     public void loadObjects() {

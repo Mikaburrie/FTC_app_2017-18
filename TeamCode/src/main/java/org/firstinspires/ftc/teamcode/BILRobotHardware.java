@@ -36,6 +36,8 @@ public class BILRobotHardware {
     public double leftGripperMaxLeft = 0.0;
     public double jewelArmStartPosition = 0.5;
 
+    public Servo pusher; //for compatibility
+
     /* local OpMode members. */
     HardwareMap hwMap = null;
 
