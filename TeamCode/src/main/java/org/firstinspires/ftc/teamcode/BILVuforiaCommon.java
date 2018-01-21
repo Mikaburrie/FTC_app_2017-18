@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.util.Range;
 import com.vuforia.HINT;
 import com.vuforia.Vuforia;
 
@@ -11,7 +10,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
-//import org.firstinspires.ftc.robotcore.internal.VuforiaTrackablesImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,6 +51,11 @@ public class BILVuforiaCommon {
             imageTargets.get(i).setName(name);
             i++;
         }
+        return imageTargets;
+    }
+
+    public VuforiaTrackables loadTargets(String file) {
+        VuforiaTrackables imageTargets = vuforia.loadTrackablesFromAsset(file); //gets the targets from assets
         return imageTargets;
     }
 
