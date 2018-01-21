@@ -21,9 +21,9 @@ import java.util.List;
 public class BILVuforiaCommon {
 
     VuforiaLocalizer vuforia;
-    int redBeaconColor = 2;
-    int blueBeaconColor = 4;
-    int targetImageDistance = 90;
+    public int redBeaconColor = 2;
+    public int blueBeaconColor = 4;
+    public int targetImageDistance = 90;
 
     public VuforiaLocalizer initVuforia(boolean cameraPreview, int maxTrackables) {
         //Sets up camera and initializes vuforia.
