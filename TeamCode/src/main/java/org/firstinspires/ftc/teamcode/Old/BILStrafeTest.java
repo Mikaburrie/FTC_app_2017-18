@@ -1,12 +1,14 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Old;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
+import org.firstinspires.ftc.teamcode.BILAutonomousCommon;
 
 /**
  * Created by mikab_000 on 1/10/2017.
  */
 @Autonomous(name="BIL: Strafe Test", group="BIL")
-public class BILStrafeTest extends BILAutonomousCommon{
+public class BILStrafeTest extends BILAutonomousCommon {
 
     @Override
     public void runOpMode() throws InterruptedException{
