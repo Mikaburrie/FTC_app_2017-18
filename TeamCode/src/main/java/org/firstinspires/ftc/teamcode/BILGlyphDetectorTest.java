@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Created by mikab_000 on 1/5/2018.
  */
 
-@Autonomous(name="BIL: Glyph Detector Test", group="Test")
+@Autonomous(name="Glyph Detector Test", group="Test")
 public class BILGlyphDetectorTest extends OpMode
 {
     // Declare OpMode members.

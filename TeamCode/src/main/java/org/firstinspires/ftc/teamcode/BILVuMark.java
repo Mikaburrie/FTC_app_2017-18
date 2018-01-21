@@ -8,7 +8,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
-@Autonomous(name="BIL: VuMark Detection Test", group="Test")
+@Autonomous(name="VuMark Detection Test", group="Test")
 //@Disabled
 public class BILVuMark extends BILAutonomousCommon {
 

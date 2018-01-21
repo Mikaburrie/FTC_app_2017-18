@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Created by mikab_000 on 1/6/2018.
  */
 
-@Autonomous(name="BIL: Jewel Detector Test", group="Test")
+@Autonomous(name="Jewel Detector Test", group="Test")
 public class BILJewelDetectorTest extends OpMode
 {
     // Declare OpMode members.

@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created on 11/12/2016 by Mika.
  */
-@Autonomous(name="BIL: Blue Beacons", group="BIL")
+@Autonomous(name="Blue Beacons", group="Old")
 @Disabled
 public class BILVuforiaBlueBeacons extends BILAutonomousCommon {
     VuforiaLocalizer vuforia;

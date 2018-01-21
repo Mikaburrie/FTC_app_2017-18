@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.BILVuforiaCommon;
  * Created by mikab_000 on 11/3/2016.
  */
 
-@Autonomous(name="BIL: Vuforia Image Recognition", group="BIL")
+@Autonomous(name="Vuforia Image Recognition", group="Old")
 @Disabled
 public class BILVuforiaImageRecognition extends BILAutonomousCommon {
 
