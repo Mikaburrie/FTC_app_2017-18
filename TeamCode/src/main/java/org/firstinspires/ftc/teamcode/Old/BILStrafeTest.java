@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.BILAutonomousCommon;
 /**
  * Created by mikab_000 on 1/10/2017.
  */
-@Autonomous(name="BIL: Strafe Test", group="BIL")
+@Autonomous(name="BIL: Strafe Test", group="Test")
 public class BILStrafeTest extends BILAutonomousCommon {
 
     @Override

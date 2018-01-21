@@ -19,7 +19,7 @@ import android.util.Log;
  *Enables control of the robot via the gamepad
  */
 
-@Autonomous(name="BIL: Camera Test", group="BIL")
+@Autonomous(name="BIL: Camera Test", group="Test")
 @Disabled
 public class BILCameraOp extends OpMode {
     private Camera camera;

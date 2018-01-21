@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.BILVuforiaCommon;
 /**
  * Created on 12/31/2016 by Mika.
  */
-@Autonomous(name="BIL: Gears Tracking Test", group="BIL")
+@Autonomous(name="BIL: Gears Tracking Test", group="Test")
 @Disabled
 public class BILVuforiaGearsPicTest extends BILAutonomousCommon {
 

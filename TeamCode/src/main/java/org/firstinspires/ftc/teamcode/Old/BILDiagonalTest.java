@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.BILAutonomousCommon;
 /**
  * Created on 1/10/2017 by Mika.
  */
-@Autonomous(name="BIL: Diagonal Test", group="BIL")
+@Autonomous(name="BIL: Diagonal Test", group="Test")
 public class BILDiagonalTest extends BILAutonomousCommon {
 
     @Override

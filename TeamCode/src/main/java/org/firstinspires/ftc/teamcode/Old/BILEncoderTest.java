@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.BILAutonomousCommon;
  * Created by mikab_000 on 1/9/2018.
  */
 
-@Autonomous(name="BIL: Encoder Test", group="BIL")
+@Autonomous(name="BIL: Encoder Test", group="Test")
 public class BILEncoderTest extends BILAutonomousCommon {
 
     @Override public void runOpMode() throws InterruptedException {

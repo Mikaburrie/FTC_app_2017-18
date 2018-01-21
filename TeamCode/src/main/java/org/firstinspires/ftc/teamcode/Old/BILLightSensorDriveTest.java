@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.BILAutonomousCommon;
 /**
  * Made by Zoha Peterson on 12/31/16.
  */
-@Autonomous(name="BIL: Light Sensor Drive Test", group="BIL")
+@Autonomous(name="BIL: Light Sensor Drive Test", group="Test")
 public class BILLightSensorDriveTest extends BILAutonomousCommon {
 
     @Override
