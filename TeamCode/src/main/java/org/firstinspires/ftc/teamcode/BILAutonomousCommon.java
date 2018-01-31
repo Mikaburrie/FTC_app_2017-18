@@ -38,10 +38,6 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
         RED, BLUE, UNKNOWN
     }
 
-    public enum Side {
-        LEFT, MIDDLE, RIGHT, UNKNOWN
-    }
-
     public final static int ticksPerRotation = 1440;
     public final static double wheelCircumference = (4 * Math.PI)/12; //circumference in feet
     public final static int driveTimeScalar = 3;
