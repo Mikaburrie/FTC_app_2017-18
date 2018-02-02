@@ -9,7 +9,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
+import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 import com.disnodeteam.dogecv.detectors.JewelDetector;
 
@@ -24,6 +27,11 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
 
     CryptoboxDetector cDetector = new CryptoboxDetector();
     JewelDetector jDetector = new JewelDetector();
+
+    VuforiaLocalizer vuforia;
+    BILVuforiaCommon helper = new BILVuforiaCommon();
+    VuforiaTrackables imageTargets;
+    VuforiaTrackable imageTemplate;
 
 
     public enum Color {
@@ -40,6 +48,11 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
     public void loadObjects() {
         cDetector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
         jDetector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+
+        this.vuforia = helper.initVuforia(false, 4);
+        imageTargets = helper.loadTargets("RelicVuMark");
+        imageTemplate = imageTargets.get(0);
+        imageTemplate.setName("VuMarkTemplate");
     }
 
     /**
@@ -374,6 +387,26 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
         jDetector.disable();
 
         return left;
+    }
+
+    public RelicRecoveryVuMark detectImageSide() {
+        RelicRecoveryVuMark position = RelicRecoveryVuMark.UNKNOWN;
+
+        imageTargets.activate();
+
+        while(opModeIsActive() && !isStopRequested() && position == RelicRecoveryVuMark.UNKNOWN) {
+            position = RelicRecoveryVuMark.from(imageTemplate);
+            if (position != RelicRecoveryVuMark.UNKNOWN) {
+                telemetry.addData("VuMark", "%s visible", position);
+            } else {
+                telemetry.addData("VuMark", "not visible");
+            }
+            telemetry.update();
+        }
+
+        imageTargets.deactivate();
+
+        return position;
     }
 
     public void parkSafe(boolean leftPos) {
