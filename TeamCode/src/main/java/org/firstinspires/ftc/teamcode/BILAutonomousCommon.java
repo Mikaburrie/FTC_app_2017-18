@@ -422,11 +422,18 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
     }
 
     public Side detectImageSide() {
+        time.reset();
         RelicRecoveryVuMark position = RelicRecoveryVuMark.UNKNOWN;
 
         imageTargets.activate();
 
         while(opModeIsActive() && !isStopRequested() && position == RelicRecoveryVuMark.UNKNOWN) {
+
+            //if taking too long
+            if(time.milliseconds() > 5000){
+                return Side.UNKNOWN;
+            }
+
             position = RelicRecoveryVuMark.from(imageTemplate);
             if (position != RelicRecoveryVuMark.UNKNOWN) {
                 telemetry.addData("VuMark", "%s visible", position);
@@ -446,6 +453,10 @@ public abstract class BILAutonomousCommon extends LinearOpMode {
         }else{
             return Side.RIGHT;
         }
+    }
+
+    public void driveToPos(Side pos) {
+        //aligning, etc.
     }
 
     public void parkSafe(boolean leftPos) {

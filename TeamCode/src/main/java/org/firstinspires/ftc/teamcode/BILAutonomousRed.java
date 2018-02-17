@@ -33,17 +33,6 @@ public class BILAutonomousRed extends BILAutonomousCommon
         telemetry.addData("Blue", robot.colorSensor.blue());
         telemetry.update();
 
-//        if(robot.colorSensor.red() > robot.colorSensor.blue()){ //left side red
-//
-//            setDriveMotors(0.5, 0.5, -0.5, -0.5);
-//            rightMovement = true;
-//        } else if(robot.colorSensor.blue() > robot.colorSensor.red()) { //right side is red
-//
-//            setDriveMotors(-0.5, -0.5, 0.5, 0.5);
-//            leftMovement = true;
-//        }
-
-
         Color left = detectLeft();
 
         if(left == RED) {
@@ -52,6 +41,12 @@ public class BILAutonomousRed extends BILAutonomousCommon
             knockJewelSide(RIGHT);
         }
         //setDriveMotors(0.5, -0.5, -0.5, 0.5);
+
+        /*
+        Side blockPos = detectImageSide();
+        driveToPos(blockPos);
+        //place block
+         */
 
         delay(2000);
 
