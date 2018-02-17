@@ -7,6 +7,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import static org.firstinspires.ftc.teamcode.BILAutonomousCommon.Color.*;
+import static org.firstinspires.ftc.teamcode.BILAutonomousCommon.Side.*;
 
 @Autonomous(name="Autonomous Red", group="BIL")
 public class BILAutonomousRed extends BILAutonomousCommon
@@ -46,29 +47,10 @@ public class BILAutonomousRed extends BILAutonomousCommon
         Color left = detectLeft();
 
         if(left == RED) {
-            setDriveMotors(0.5,0.5,-0.5,-0.5);
+            knockJewelSide(LEFT);
         } else if(left == BLUE) {
-            setDriveMotors(-0.5,-0.5,0.5,0.5);
+            knockJewelSide(RIGHT);
         }
-
-        delay(250);
-
-        setAllDriveMotors(0);
-
-        robot.jewelArm.setPosition(0.5);
-
-
-        delay(500);
-
-        if(left == BLUE) {
-            setDriveMotors(-0.5,-0.5,0.5,0.5);
-        } else if(left == RED) {
-            setDriveMotors(0.5,0.5,-0.5,-0.5);
-        }
-
-        delay(250);
-
-        setAllDriveMotors(0);
         //setDriveMotors(0.5, -0.5, -0.5, 0.5);
 
         delay(2000);
