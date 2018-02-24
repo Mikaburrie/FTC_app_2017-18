@@ -32,7 +32,7 @@ public class BILDemoOp extends OpMode {
 
     double extendRecoverer;
 
-    double liftPitch = robot.liftPitch.getPosition();
+    double liftPitch = 0;
 
     double expo;
 
@@ -45,7 +45,6 @@ public class BILDemoOp extends OpMode {
     public BILDemoOp() {
         bilTeleOpJoystick = new BILTeleOpJoystick();
     }
-
     /*
      * Code to run when the op mode is first enabled goes here
      *
@@ -73,9 +72,8 @@ public class BILDemoOp extends OpMode {
 
         setMotorSpeeds();
 
-
         //setPusher();
-        setGrippers();
+       // setGrippers();
 
         //deployLift();
 
@@ -85,6 +83,7 @@ public class BILDemoOp extends OpMode {
         telemetry.addData("BackLeft Power", String.format("%.2f", backLeft));
         telemetry.addData("FrontRight Power", String.format("%.2f", frontRight));
         telemetry.addData("BackRight Power", String.format("%.2f", backRight));
+        telemetry.addData("lift Power", String.format("%.2f", liftSpeed));
         telemetry.update();
     }
 
@@ -105,9 +104,9 @@ public class BILDemoOp extends OpMode {
         // 1 is full right
         // direction: left_stick_x ranges from -1 to 1, where -1 is full left
         // and 1 is full right
-        throttleX = -gamepad1.left_stick_y;
-        throttleY = gamepad1.left_stick_x;
-        turning = gamepad1.right_stick_x;
+        throttleX = gamepad1.left_stick_x;
+        throttleY = gamepad1.left_stick_y;
+        turning = -gamepad1.right_stick_x;
         //glyphGatherer = gamepad2.left_stick_y;
         relicExtend = gamepad2.right_stick_x;
 
@@ -150,9 +149,10 @@ public class BILDemoOp extends OpMode {
         robot.motorBackLeft.setPower(backLeft);
         robot.motorFrontRight.setPower(frontRight);
         robot.motorBackRight.setPower(backRight);
-        robot.motorLift.setPower(-liftSpeed);
-        robot.glyphGatherer.setPower(glyphGatherer);
-        robot.relicExtend.setPosition(relicExtend);
+        robot.motorLift.setPower(liftSpeed);
+        robot.glyphGathererL.setPower(glyphGatherer);
+        robot.glyphGathererR.setPower(glyphGatherer);
+        //robot.relicExtend.setPosition(relicExtend);
 
     }
 
@@ -181,20 +181,34 @@ public class BILDemoOp extends OpMode {
     }
 
     protected void getGamepadInputs() {
-        liftPitch = robot.liftPitch.getPosition();
-        if(gamepad1.dpad_left) robot.liftPitch.setPosition(liftPitch - .05);
-        if(gamepad1.dpad_right) robot.liftPitch.setPosition(liftPitch + .05);
 
-        if(gamepad1.dpad_up) liftSpeed = .5;
-        if(gamepad1.dpad_down) liftSpeed = -.5;
+        if(gamepad1.x) robot.liftPitch.setPosition(0);
+        else robot.liftPitch.setPosition(0.70);
 
-        if(gamepad1.x) robot.relicDeploy.setPosition(0.0);
-        if(gamepad1.b) robot.relicDeploy.setPosition(1.0);
+        if(gamepad1.dpad_up)
+            liftSpeed = .75;
+        else
+            liftSpeed = 0;
+        if(gamepad1.dpad_down)
+            liftSpeed = -.75;
+        else
+            liftSpeed = 0;
 
-        if(gamepad1.y) robot.glyphGatherer.setPower(0.5);
-        if(gamepad1.a) robot.glyphGatherer.setPower(-0.5);
+      //  if(gamepad1.x) robot.relicDeploy.setPosition(0.0);
+        //if(gamepad1.b) robot.relicDeploy.setPosition(1.0);
+
+        if(gamepad1.y) robot.glyphGathererL.setPower(1);
+        if(gamepad1.a) robot.glyphGathererL.setPower(-1);
+        if(gamepad1.y) robot.glyphGathererR.setPower(-1);
+        if(gamepad1.a) robot.glyphGathererR.setPower(1);
     }
+    protected void setFlipper(){
+        double flapperPosition = robot.liftPitch.getPosition();
+        if(gamepad1.right_bumper) flapperPosition += 0.25;
+        if(gamepad1.left_bumper) flapperPosition -= 0.25;
 
+        robot.liftPitch.setPosition(flapperPosition);
+    }
 	/*protected void setPusher() {
 		double pusherPosition = robot.pusherMiddle;
 		if(gamepad2.right_trigger > 0.5) {
