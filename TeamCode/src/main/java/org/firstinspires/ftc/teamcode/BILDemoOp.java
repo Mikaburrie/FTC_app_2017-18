@@ -24,13 +24,7 @@ public class BILDemoOp extends OpMode {
     double throttleX;
     double turning;
     double liftSpeed;
-    //	double rightGripper;
-    //	double leftGripper;
-    double jewelArm;
     double glyphGatherer;
-    double relicExtend;
-
-    double extendRecoverer;
 
     double liftPitch = 0;
 
@@ -68,14 +62,9 @@ public class BILDemoOp extends OpMode {
 
         scaleJoystickInput();
 
-        getGamepadInputs();
+    //    getGamepadInputs();
 
         setMotorSpeeds();
-
-        //setPusher();
-       // setGrippers();
-
-        //deployLift();
 
         //telemetry.addData("Text", "*** Robot Data***");
         telemetry.addData("F/R", "direction:  " + String.format("%b",directionRobot ));
@@ -107,8 +96,7 @@ public class BILDemoOp extends OpMode {
         throttleX = gamepad1.left_stick_x;
         throttleY = gamepad1.left_stick_y;
         turning = -gamepad1.right_stick_x;
-        //glyphGatherer = gamepad2.left_stick_y;
-        relicExtend = gamepad2.right_stick_x;
+        glyphGatherer = gamepad2.right_stick_y;
 
         //liftSpeed = -gamepad2.left_stick_y;
     }
@@ -120,12 +108,12 @@ public class BILDemoOp extends OpMode {
         else {
             expo = 1.1;
         }
+
         // scale the joystick value to make it easier to control
         // the robot more precisely at slower speeds.
         throttleY = bilTeleOpJoystick.normalizeSpeed(throttleY, expo, maxSpeed);
         throttleX = bilTeleOpJoystick.normalizeSpeed(throttleX, expo, maxSpeed);
         turning = bilTeleOpJoystick.normalizeSpeed(turning, expo, maxSpeed);
-        relicExtend = bilTeleOpJoystick.normalizeSpeed(relicExtend, expo, maxSpeed);
         //liftSpeed = bilTeleOpJoystick.normalizeSpeed(liftSpeed, 2.0, maxSpeed);
     }
 
@@ -150,34 +138,8 @@ public class BILDemoOp extends OpMode {
         robot.motorFrontRight.setPower(frontRight);
         robot.motorBackRight.setPower(backRight);
         robot.motorLift.setPower(liftSpeed);
-        robot.glyphGathererL.setPower(glyphGatherer);
-        robot.glyphGathererR.setPower(glyphGatherer);
-        //robot.relicExtend.setPosition(relicExtend);
-
-    }
-
-    protected void setGrippers() {
-        double rightGripperPosition = robot.rightGrabber.getPosition();
-        double leftGripperPosition = robot.leftGrabber.getPosition();
-        if (gamepad2.right_trigger > 0.5) {
-            rightGripperPosition = 0.8;
-        } else {
-            rightGripperPosition = -0.5;
-        }
-
-        if (gamepad2.left_trigger > 0.5) {
-            leftGripperPosition = 0.8;
-        } else {
-            leftGripperPosition = -0.5;
-        }
-
-        robot.rightGrabber.setPosition(rightGripperPosition);
-        robot.leftGrabber.setPosition(leftGripperPosition);
-    }
-
-    protected void setJewelArm() {
-        double jewelArmPosition = robot.jewelArm.getPosition();
-        robot.jewelArm.setPosition(1.0);
+        robot.gatherRight.setPower(glyphGatherer);
+        robot.gatherLeft.setPower(glyphGatherer);
     }
 
     protected void getGamepadInputs() {
@@ -193,39 +155,6 @@ public class BILDemoOp extends OpMode {
             liftSpeed = -.75;
         else
             liftSpeed = 0;
-
-      //  if(gamepad1.x) robot.relicDeploy.setPosition(0.0);
-        //if(gamepad1.b) robot.relicDeploy.setPosition(1.0);
-
-        if(gamepad1.y) robot.glyphGathererL.setPower(1);
-        if(gamepad1.a) robot.glyphGathererL.setPower(-1);
-        if(gamepad1.y) robot.glyphGathererR.setPower(-1);
-        if(gamepad1.a) robot.glyphGathererR.setPower(1);
     }
-    protected void setFlipper(){
-        double flapperPosition = robot.liftPitch.getPosition();
-        if(gamepad1.right_bumper) flapperPosition += 0.25;
-        if(gamepad1.left_bumper) flapperPosition -= 0.25;
 
-        robot.liftPitch.setPosition(flapperPosition);
-    }
-	/*protected void setPusher() {
-		double pusherPosition = robot.pusherMiddle;
-		if(gamepad2.right_trigger > 0.5) {
-			pusherPosition = robot.pusherRight;
-		} else if(gamepad2.left_trigger > 0.5) {
-			pusherPosition = robot.pusherLeft;
-		}
- [
-		robot.pusher.setPosition(pusherPosition);
-	}*/
-
-	/*protected void deployLift() {
-		if(!liftDeployed) {
-			if(gamepad2.x && gamepad2.b) {
-				liftDeployed = true;
-				robot.liftHolder.setTargetPosition(robot.liftHolderRelease);
-			}
-		}
-	}*/
 }
