@@ -31,7 +31,7 @@ public class BILTeleOp extends OpMode {
 	double expo;
 
 	boolean directionRobot = true;
-	double maxSpeed = 0.7;
+	double maxSpeed = 0.4;
 	BILTeleOpJoystick bilTeleOpJoystick;
 	/**
 	 * Constructor
